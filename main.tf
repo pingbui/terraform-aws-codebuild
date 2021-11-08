@@ -378,7 +378,7 @@ resource "aws_codebuild_project" "default" {
     }
 
     dynamic "environment_variable" {
-      for_each = signum(length(var.github_token)) == 1 ? [""] : []
+      for_each = signum(length(var.github_token)) == 1 && var.github_token_type != "PARAMETER_STORE" ? [""] : []
       content {
         name  = "GITHUB_TOKEN"
         value = var.github_token
